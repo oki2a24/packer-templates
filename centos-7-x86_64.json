@@ -10,14 +10,14 @@
     "iso_checksum_type": "sha256",
     "ssh_username": "vagrant",
     "ssh_password": "vagrant",
-    "ssh_wait_timeout": "3000s",
+    "ssh_wait_timeout": "10m",
     "vm_name": "packer-centos-7-x86_64",
     "ssh_pty": true,
     "http_directory": "./",
     "boot_wait": "30s",
     "boot_command":[
       "<esc><wait>",
-      "linux ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos-7-x86_64/anaconda-ks.cfg",
+      "linux inst.ks=http://{{.HTTPIP }}:{{.HTTPPort }}/centos-7-x86_64/anaconda-ks.cfg",
       "<enter><wait>"
     ],
     "shutdown_command": "sudo /sbin/poweroff"
