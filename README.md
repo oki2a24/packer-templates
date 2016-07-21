@@ -1,5 +1,6 @@
 # packer-templates
 ## 特徴
+- 言語設定は日本語、ja_JP.UTF-8
 - 日本語キーボード
 - timezone は Asia/Tokyo
 
