@@ -1,44 +1,34 @@
 {
+  "variables": {
+    "my_iso_url": "http://mirrors.kernel.org/centos/7.2.1511/isos/x86_64/CentOS-7-x86_64-Minimal-1511.iso"
+  },
   "builders": [{
-    "type": "virtualbox-iso",
-    "headless": false,
-
-    "guest_os_type": "RedHat_64",
-    "disk_size": 80960,
-
-    "iso_url": "http://mirrors.kernel.org/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1511.iso",
-    "iso_checksum": "783eef50e1fb91c78901d0421d8114a29b998478",
-    "iso_checksum_type": "sha1",
-
-    "boot_command": [
-      "<tab> net.ifnames=0 biosdevname=0 text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos-7-x86_64/anaconda-ks.cfg<enter><wait>"
-    ],
-    "boot_wait": "12s",
-
-    "http_directory": "./",
-
-    "ssh_username": "vagrant",
-    "ssh_password": "vagrant",
-    "ssh_port": 22,
-    "ssh_pty": true,
-    "ssh_wait_timeout": "10000s",
-
-    "vboxmanage": [
-      ["modifyvm", "{{.Name}}", "--memory", "512"],
-      ["modifyvm", "{{.Name}}", "--cpus", "1"]
-    ],
-
-    "shutdown_command": "echo 'vagrant'|sudo -S /sbin/halt -h -p"
-  }],
-  "post-processors": [{
-    "output": "centos-7-1511-x86_64.box",
-    "type": "vagrant",
-    "only": ["virtualbox-iso"]
+  "type": "virtualbox-iso",
+  "guest_os_type": "RedHat_64",
+  "iso_url": "http://mirrors.kernel.org/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1511.iso",
+  "iso_checksum": "783eef50e1fb91c78901d0421d8114a29b998478",
+  "iso_checksum_type": "sha1",
+  "boot_command": [
+    "<tab> net.ifnames=0 biosdevname=0 text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos-7-x86_64/anaconda-ks.cfg<enter><wait>"
+  ],
+  "boot_wait": "12s",
+  "http_directory": "./",
+  "ssh_username": "vagrant",
+  "ssh_password": "vagrant",
+  "ssh_port": 22,
+  "ssh_pty": true,
+  "ssh_wait_timeout": "10000s",
+  "shutdown_command": "echo 'vagrant'|sudo -S /sbin/halt -h -p"
   }],
   "provisioners": [{
     "type": "shell",
     "scripts": [
       "centos-7-x86_64/scripts.sh"
     ]
+  }],
+  "post-processors": [{
+    "output": "centos-7-1511-x86_64.box",
+    "type": "vagrant",
+    "only": ["virtualbox-iso"]
   }]
 }
