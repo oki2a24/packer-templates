@@ -1,34 +1,33 @@
 {
   "variables": {
-    "my_iso_url": "http://mirrors.kernel.org/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1511.iso"
+    "my_iso_url": "http://mirrors.kernel.org/centos/7.2.1511/isos/x86_64/CentOS-7-x86_64-Minimal-1511.iso"
   },
-  "builders": [{
-  "type": "virtualbox-iso",
-  "guest_os_type": "RedHat_64",
-  "iso_url": "{{user `my_iso_url`}}",
-  "iso_checksum": "f90e4d28fa377669b2db16cbcb451fcb9a89d2460e3645993e30e137ac37d284",
-  "iso_checksum_type": "sha256",
-  "boot_command": [
-    "<tab> net.ifnames=0 biosdevname=0 text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos-7-x86_64/anaconda-ks.cfg<enter><wait>"
-  ],
-  "boot_wait": "12s",
-  "http_directory": "./",
-  "ssh_username": "vagrant",
-  "ssh_password": "vagrant",
-  "ssh_port": 22,
-  "ssh_pty": true,
-  "ssh_wait_timeout": "10000s",
-  "shutdown_command": "echo 'vagrant'|sudo -S /sbin/halt -h -p"
+  "builders":[{
+    "type": "virtualbox-iso",
+    "guest_os_type": "RedHat_64",
+    "iso_url": "{{user `my_iso_url`}}",
+    "iso_checksum": "f90e4d28fa377669b2db16cbcb451fcb9a89d2460e3645993e30e137ac37d284",
+    "iso_checksum_type": "sha256",
+    "ssh_username": "vagrant",
+    "ssh_password": "vagrant",
+    "ssh_wait_timeout": "30m",
+    "vm_name": "packer-centos-7-x86_64",
+    "ssh_pty": true,
+    "http_directory": "./",
+    "boot_wait": "12s",
+    "boot_command":[
+      "<esc><wait>",
+      "linux inst.ks=http://{{.HTTPIP }}:{{.HTTPPort }}/centos-7-x86_64/anaconda-ks.cfg",
+      "<enter><wait>"
+    ],
+    "shutdown_command": "sudo /sbin/poweroff"
   }],
   "provisioners": [{
     "type": "shell",
-    "scripts": [
-      "centos-7-x86_64/scripts.sh"
-    ]
+    "scripts": "centos-7-x86_64/scripts.sh"
   }],
   "post-processors": [{
-    "output": "centos-7-1511-x86_64.box",
     "type": "vagrant",
-    "only": ["virtualbox-iso"]
+    "output": "centos-7-x86_64.box"
   }]
 }
