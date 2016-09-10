@@ -1,7 +1,8 @@
 #!/bin/bash
 
-set -e
-set -x
+set -eux
+
+sudo yum -y update
 
 # vagrant insecure private key 設定
 date | sudo tee /etc/vagrant_box_build_time
@@ -17,12 +18,11 @@ sudo sed -i -e 's/#UseDNS yes/UseDNS no/' /etc/ssh/sshd_config
 
 # VirtualBox Guest Additions のインストール
 # リポジトリ導入、無効化
-sudo yum -y install https://download.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-6.noarch.rpm
+sudo yum -y install epel-release
 sudo sed -i -e 's/^enabled=1/enabled=0/' /etc/yum.repos.d/epel.repo
 
-sudo yum -y install bzip2
+sudo yum -y install bzip2 kernel-devel make perl
 sudo yum -y --enablerepo=epel install dkms
-sudo yum -y install make
 
 sudo mount -o loop,ro ~/VBoxGuestAdditions.iso /mnt/
 sudo /mnt/VBoxLinuxAdditions.run || :
