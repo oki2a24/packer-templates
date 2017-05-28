@@ -1,12 +1,12 @@
 {
   "variables": {
-    "my_iso_url": "http://mirrors.kernel.org/centos/6.8/isos/x86_64/CentOS-6.8-x86_64-minimal.iso"
+    "my_iso_url": "http://mirrors.kernel.org/centos/6.9/isos/x86_64/CentOS-6.9-x86_64-minimal.iso"
   },
   "builders":[{
     "type": "virtualbox-iso",
     "guest_os_type": "RedHat_64",
     "iso_url": "{{user `my_iso_url`}}",
-    "iso_checksum": "ec49c297d484b9da0787e5944edc38f7c70f21c0f6a60178d8e9a8926d1949f4",
+    "iso_checksum": "422af57b493b8af49d485885a730c5a1d955f803fac85aa51311c393168b9080",
     "iso_checksum_type": "sha256",
     "ssh_username": "vagrant",
     "ssh_password": "vagrant",
