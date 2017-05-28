@@ -24,7 +24,9 @@ sudo yum -y install https://download.fedoraproject.org/pub/epel/6/x86_64/epel-re
 sudo sed -i -e 's/^enabled=1/enabled=0/' /etc/yum.repos.d/epel.repo
 
 sudo yum -y --enablerepo=epel install dkms
-sudo yum -y install perl
+# In CentOS 6 or earlier, dkms package provides SysV init script called
+# dkms_autoinstaller that is enabled by default
+sudo yum -y install kernel-devel perl
 
 sudo mount -o loop,ro ~/VBoxGuestAdditions.iso /mnt/
 sudo /mnt/VBoxLinuxAdditions.run || :
