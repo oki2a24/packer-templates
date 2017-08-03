@@ -21,8 +21,10 @@ sudo sed -i -e 's/#UseDNS yes/UseDNS no/' /etc/ssh/sshd_config
 sudo yum -y install epel-release
 sudo sed -i -e 's/^enabled=1/enabled=0/' /etc/yum.repos.d/epel.repo
 # 必要パッケージのインストール
-sudo yum -y install bzip2 gcc make perl
+sudo yum -y install bzip2 gcc kernel-devel make perl
 sudo yum -y --enablerepo=epel install dkms
+sudo systemctl start dkms
+sudo systemctl enable dkms
 # VirtualBox Guest Additions のインストール
 sudo mount -o loop,ro ~/VBoxGuestAdditions.iso /mnt/
 sudo /mnt/VBoxLinuxAdditions.run || :
