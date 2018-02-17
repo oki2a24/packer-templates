@@ -8,5 +8,5 @@
 ```
 git clone https://github.com/oki2a24/packer-templates.git
 cd packer-templates
-packer build centos-6.8-x86_64.json
+packer build centos-7-x86_64.json
 ```

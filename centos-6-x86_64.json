@@ -28,6 +28,6 @@
   }],
   "post-processors": [{
     "type": "vagrant",
-    "output": "centos-6.8-x86_64.box"
+    "output": "centos-6-x86_64.box"
   }]
 }
